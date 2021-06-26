@@ -25,6 +25,8 @@ TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "4"))
 #Second Cannel
 DS_CHANNEL = int(os.environ.get("DS_CHANNEL", ""))
 
+ADVERT_TEXT = os.environ.get("ADVERT_TEXT", "")
+
 #start message
 START_MSG = os.environ.get("START_MESSAGE", "Hello {first}\n\nI can store private files in Specified Channel and other users can access it from special link.")
 try:

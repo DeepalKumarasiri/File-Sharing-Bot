@@ -6,7 +6,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import FloodWait
 
 from bot import Bot
-from config import ADMINS, START_MSG, OWNER_ID, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON
+from config import ADMINS, START_MSG, OWNER_ID, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, ADVERT_TEXT
 from helper_func import subscribed, encode, decode, get_messages, get_messages_ip
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)

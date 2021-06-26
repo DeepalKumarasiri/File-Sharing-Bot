@@ -35,14 +35,24 @@ async def start_command(client: Client, message: Message):
                     i -= 1
                     if i < end:
                         break
+            try:
+                messages = await get_messages(client, ids)
+            except:
         elif len(argument) == 2:
             try:
                 ids = [int(argument[1])]
+                messages = await get_messages_ip(client, ids)
             except:
                 return
-        temp_msg = await message.reply("Please wait...")
+        elif len(argument) == 4:
+            try:
+                ids = [int(argument[1])]
+                messages = await get_messages(client, ids)
+            except:
+                return
+        temp_msg = await message.reply("😊 කරුණාකර මදක් ‍රැඳී සිටින්න...")
         try:
-            messages = await get_messages(client, ids)
+            await message.reply_text(ADVERT_TEXT)
         except:
             await message.reply_text("Something went wrong..!")
             return
@@ -59,13 +69,14 @@ async def start_command(client: Client, message: Message):
                 reply_markup = msg.reply_markup
             else:
                 reply_markup = None
+                caption_new = caption.replace("@WMR_", "").replace("@gatayaofficialnew", "").replace("@gatayaofficial", "").replace("@gataya", "").replace("@MovieWorld2000", "").replace("@MovieWorld2001", "").replace("@cinemahubsl", "").replace("@WEB_SERIES_SL", "").replace("@CC_New", "").replace("@iMediaShare", "").replace("@TvSeriesBay", "").replace("@CC_ALL", "").replace("@CC_X265", "").replace("@x265SL", "").replace("@CC", "").replace("@GlinkZ", "").replace("@GlinkZFilms", "").replace("@GlinkZGroup", "").replace("@GlinkZmovies", "").replace("@BM_Links", "").replace("@RickyChannel", "").replace("@Dramaost", "").replace("@lubokvideo", "")
 
             try:
-                await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = 'html', reply_markup = reply_markup)
+                await msg.copy(chat_id=message.from_user.id, caption = caption_new, parse_mode = 'html', reply_markup = reply_markup)
                 await asyncio.sleep(0.5)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
-                await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = 'html', reply_markup = reply_markup)
+                await msg.copy(chat_id=message.from_user.id, caption = caption_new, parse_mode = 'html', reply_markup = reply_markup)
             except:
                 pass
         return
@@ -94,14 +105,17 @@ async def start_command(client: Client, message: Message):
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
-    text = "<b>You need to join in my Channel/Group to use me\n\nKindly Please join Channel</b>"
     message_text = message.text
     try:
         command, argument = message_text.split()
-        text = text + f" <b>and <a href='https://t.me/{client.username}?start={argument}'>try again</a></b>"
+        text = "<b>📌මගෙන් Film ගන්න නම් ඔයා අපේ Channel එකට Join වෙලා ඉන්න ඕනි.\n📌You need to join in my Channel to use me.\n\n⏳පහල Button එක Click කරල Channel එකට Join වෙන්න.\n⏳Kindly Please join Channel</b>\n\n😇Join වුනාට පස්සෙ පහල 'තියන Try Again' උඩ Click කරන්න. ඔයාට Film එක ලැබෙයි.\nAfter Join to Channel hit on 'Try Again' Text to Get Movie"
+    message_text = message.text
+    try:
+        command, argument = message_text.split()
+        text = text + f" <b>\n\n<a href='https://t.me/{client.username}?start={argument}'>👍🏽 Try Again 🔗</a></b>"
     except ValueError:
         pass
-    reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Join Channel", url = client.invitelink)]])
+    reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🇱🇰 Join Channel❗️", url = client.invitelink)]])
     await message.reply(
         text = text,
         reply_markup = reply_markup,
